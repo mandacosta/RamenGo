@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Broth {
+  id            String  @id @default(uuid())
+  imageInactive String
+  imageActive   String
+  name          String
+  description   String
+  price         Decimal
+  orders        Order[]
+  menus         Menu[]
+
+  @@map("broths")
+}
+
+model Protein {
+  id            String  @id @default(uuid())
+  imageInactive String
+  imageActive   String
+  name          String
+  description   String
+  price         Decimal
+  orders        Order[]
+  menus         Menu[]
+
+  @@map("proteins")
+}
+
+// Model que guardará os pedidos feitos
+model Order {
+  id         String  @id // Gerado pela API externa
+  broth      Broth   @relation(fields: [broth_id], references: [id])
+  broth_id   String
+  protein    Protein @relation(fields: [protein_id], references: [id])
+  protein_id String
+
+  @@map("orders")
+}
+
+// Model que guardará as correspondências dos pedidos
+// para retornar descrição e imagem dos pratos
+model Menu {
+  id          String  @id @default(uuid())
+  broth       Broth   @relation(fields: [broth_id], references: [id])
+  broth_id    String
+  protein     Protein @relation(fields: [protein_id], references: [id])
+  protein_id  String
+  description String
+  image       String
+
+  @@map("menus")
+}
