@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "start-build": "node build/server.cjs",
+    "start-build": "node build/server.js",
     "seed": "tsx src/utils/seed_db.ts",
     "test:unity": "vitest run --dir src/usecases",
     "test:create-prisma-environment": "cd prisma/vitest-environment-prisma && npm link",
@@ -41,3 +41,4 @@
     "zod": "3.23.8"
   }
 }
+
