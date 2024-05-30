@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsup src --out-dir build",
+    "build": "tsup src -d build",
     "start-build": "node build/server.js",
     "seed": "tsx src/utils/seed_db.ts",
     "test:unity": "vitest run --dir src/usecases",
