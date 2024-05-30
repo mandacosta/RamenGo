@@ -2,6 +2,7 @@ import { IMenusRepository } from "@/repositories/interfaces/interface-menus-repo
 import { IOrdersRepository } from "@/repositories/interfaces/interface-orders-repository";
 import { IGenerateOrderId } from "@/services/generateOrderId/interface-generateOrderId";
 import { CouldNotPlaceOrderError } from "./errors/could-not-place-order-error";
+import { ProteinIdAndBrothIdRequired } from "./errors/brothId-and-proteinId-required-error";
 
 interface CreateOrderUseCaseRequest{
     proteinId: string,
@@ -29,6 +30,10 @@ export class CreateOrderUseCase{
     }
 
     async execute(data: CreateOrderUseCaseRequest): Promise<CreateOrderUseCaseResponse>{
+
+        if(!data.brothId || !data.proteinId){
+            throw new ProteinIdAndBrothIdRequired()
+        }
 
         const menu = await this.menusRepository.findByProteinIdAndBrothId(data.proteinId, data.brothId)
         const {orderId} = await this.generateOrderIdServie.generate()
