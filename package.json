@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "start-build": "node build/server.js",
+    "start-build": "node build/server.cjs",
     "seed": "tsx src/utils/seed_db.ts",
     "test:unity": "vitest run --dir src/usecases",
     "test:create-prisma-environment": "cd prisma/vitest-environment-prisma && npm link",
