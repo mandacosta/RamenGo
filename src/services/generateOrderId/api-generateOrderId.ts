@@ -15,11 +15,10 @@ export class APIGenerateOrderId implements IGenerateOrderId{
         const resp = await instance.post('/')
         .then((resp) => resp.data)
         .catch((err) => {
-            console.error(err)
-            return null
+            return {
+                orderId: null
+            }
         })
-        console.log("resp", resp)
-
         return resp
         
     }

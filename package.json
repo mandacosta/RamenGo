@@ -8,7 +8,8 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
     "start-build": "node build/server.js",
-    "seed": "tsx src/utils/seed_db.ts"
+    "seed": "tsx src/utils/seed_db.ts",
+    "test": "vitest run --dir src/usecases"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,9 @@
     "prisma": "5.14.0",
     "tsup": "^8.0.2",
     "tsx": "^4.11.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vite-tsconfig-paths": "4.3.2",
+    "vitest": "1.6.0"
   },
   "dependencies": {
     "@prisma/client": "5.14.0",

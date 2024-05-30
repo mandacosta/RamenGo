@@ -1,6 +1,7 @@
 import { IMenusRepository } from "@/repositories/interfaces/interface-menus-repository";
 import { IOrdersRepository } from "@/repositories/interfaces/interface-orders-repository";
 import { IGenerateOrderId } from "@/services/generateOrderId/interface-generateOrderId";
+import { CouldNotPlaceOrderError } from "./errors/could-not-place-order-error";
 
 interface CreateOrderUseCaseRequest{
     proteinId: string,
@@ -31,6 +32,10 @@ export class CreateOrderUseCase{
 
         const menu = await this.menusRepository.findByProteinIdAndBrothId(data.proteinId, data.brothId)
         const {orderId} = await this.generateOrderIdServie.generate()
+
+        if(!orderId){
+            throw new CouldNotPlaceOrderError()
+        }
 
         const order = {
             id: orderId,
