@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "start-build": "node build/server.js"
+    "start-build": "node build/server.js",
+    "seed": "tsx src/utils/seed_db.ts"
   },
   "keywords": [],
   "author": "",
