@@ -1,8 +1,6 @@
 import { IMenusRepository } from "@/repositories/interfaces/interface-menus-repository";
 import { IOrdersRepository } from "@/repositories/interfaces/interface-orders-repository";
 import { IGenerateOrderId } from "@/services/generateOrderId/interface-generateOrderId";
-import { CouldNotPlaceOrderError } from "./errors/could-not-place-order-error";
-import { ProteinIdAndBrothIdRequired } from "./errors/brothId-and-proteinId-required-error";
 
 interface CreateOrderUseCaseRequest{
     proteinId: string,
@@ -32,14 +30,14 @@ export class CreateOrderUseCase{
     async execute(data: CreateOrderUseCaseRequest): Promise<CreateOrderUseCaseResponse>{
 
         if(!data.brothId || !data.proteinId){
-            throw new ProteinIdAndBrothIdRequired()
+            throw new Error("both brothId and proteinId are required")
         }
 
         const menu = await this.menusRepository.findByProteinIdAndBrothId(data.proteinId, data.brothId)
         const {orderId} = await this.generateOrderIdServie.generate()
 
         if(!orderId){
-            throw new CouldNotPlaceOrderError()
+            throw new Error("could not place order")
         }
 
         const order = {
