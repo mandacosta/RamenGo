@@ -33,6 +33,7 @@
     "vitest": "1.6.0"
   },
   "dependencies": {
+    "@fastify/cors": "8.0.0",
     "@prisma/client": "5.14.0",
     "axios": "1.7.2",
     "decimal.js": "10.4.3",
@@ -41,4 +42,3 @@
     "zod": "3.23.8"
   }
 }
-
