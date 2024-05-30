@@ -20,6 +20,8 @@ async function main() {
     await createBrothsUseCase.execute(broths)
     await createProteinsUseCase.execute(proteins)
     await createMenusUseCase.execute(menus)
+
+    // Adicionar as verificações para testar se o banco está populado ou não
     
 }
 
