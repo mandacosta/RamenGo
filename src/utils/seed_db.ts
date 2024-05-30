@@ -7,22 +7,28 @@ import {CreateBrothsUseCase} from '@/usecases/create-broths'
 import {CreateProteinsUseCase} from '@/usecases/create-proteins'
 import {CreateMenusUseCase} from '@/usecases/create-menus'
 
+import {ListBrothsUseCase} from '@/usecases/list-broths'
+
 async function main() {
     const brothsRepository = new PrismaBrothsRepository()
-    const createBrothsUseCase = new CreateBrothsUseCase(brothsRepository)
+    const listBrothsUseCase = new ListBrothsUseCase(brothsRepository)
+    const brothsList = await listBrothsUseCase.execute()
 
-    const proteinsRepository = new PrismaProteinsRepository()
-    const createProteinsUseCase = new CreateProteinsUseCase(proteinsRepository)
-
-    const menusRepository = new PrismaMenusRepository()
-    const createMenusUseCase = new CreateMenusUseCase(menusRepository)
-
-    await createBrothsUseCase.execute(broths)
-    await createProteinsUseCase.execute(proteins)
-    await createMenusUseCase.execute(menus)
-
-    // Adicionar as verificações para testar se o banco está populado ou não
+    if(!brothsList.length){
+        const createBrothsUseCase = new CreateBrothsUseCase(brothsRepository)
     
+        const proteinsRepository = new PrismaProteinsRepository()
+        const createProteinsUseCase = new CreateProteinsUseCase(proteinsRepository)
+    
+        const menusRepository = new PrismaMenusRepository()
+        const createMenusUseCase = new CreateMenusUseCase(menusRepository)
+    
+        await createBrothsUseCase.execute(broths)
+        await createProteinsUseCase.execute(proteins)
+        await createMenusUseCase.execute(menus)
+    }else{
+        console.log("Seeds already planted!")
+    }    
 }
 
 main().then(() => {
