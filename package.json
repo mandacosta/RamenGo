@@ -9,7 +9,8 @@
     "build": "tsup src --out-dir build",
     "start-build": "node build/server.js",
     "seed": "tsx src/utils/seed_db.ts",
-    "test": "vitest run --dir src/usecases"
+    "test-unity": "vitest run --dir src/usecases",
+    "teste2e": "vitest run --dir src/http"
   },
   "keywords": [],
   "author": "",
